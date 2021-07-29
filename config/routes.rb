@@ -17,6 +17,4 @@ Rails.application.routes.draw do
 
   post '/post/tweet/:id/update', to: 'tweets#post_update', as: 'post_update_tweet'
 
-  post '/post/tweet/:id/delete', to: 'tweets#post_delete', as: 'post_delete_tweet'
-
 end
