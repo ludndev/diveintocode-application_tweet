@@ -2,8 +2,59 @@
 <form action="<%= post_update_tweet_path %>" method="post">
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
+  <h2>Old Content</h2>
+  <br>
+  <p>
+    <%= @post.content %>
+  </p>
+
+  <br><hr><br>
+
   <label for="content">Content</label>
   <textarea name="content" id="content" cols="30" rows="10" minlength="1" maxlength="140" required><%= @post.content %></textarea>
 
-  <button type="submit" name="submit">UPDATE</button>
+  <button type="submit" name="submit" onclick="window.localStorage.removeItem(lstag)">UPDATE</button>
 </form>
+
+<script>
+    /** https://stackoverflow.com/a/52937632 */
+
+    var olv = "<%= @post.content %>";
+    var textarea = document.getElementById("content");
+    textarea.addEventListener('input', writeLocalStorage);
+
+    var lstag = document.URL;
+
+    init();
+
+    textarea.onkeyup = function(){
+        init();
+    };
+
+    function writeLocalStorage() {
+        if (typeof(Storage) !== "undefined") {
+            localStorage.setItem(lstag, textarea.value);
+        } else {
+            document.getElementById("err").innerHTML = "Localstorage not supported";
+        }
+    }
+
+    function readLocalStorage() {
+        if (typeof(Storage) !== "undefined") {
+            textarea.value = localStorage.getItem(lstag);
+        } else {
+            document.getElementById("err").innerHTML = "Localstorage not supported";
+        }
+    }
+
+    function init() {
+        if (textarea.value && localStorage.getItem(lstag) !== olv) {
+            // `DOMContentLoaded` may fire before your script has a chance to run, so check before adding a listener
+            if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", readLocalStorage);
+            } else {  // `DOMContentLoaded` already fired
+                readLocalStorage();
+            }
+        }
+    }
+</script>

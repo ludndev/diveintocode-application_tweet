@@ -5,5 +5,45 @@
   <label for="content">Content</label>
   <textarea name="content" id="content" cols="30" rows="10" minlength="1" maxlength="140" required></textarea>
 
-  <button type="submit" name="submit">SAVE</button>
+  <button type="submit" name="submit" onclick="window.localStorage.removeItem(lstag)">SAVE</button>
 </form>
+
+<script>
+    /** https://stackoverflow.com/a/52937632 */
+
+    var textarea = document.getElementById("content");
+    textarea.addEventListener('input', writeLocalStorage);
+
+    var lstag = document.URL;
+
+    init();
+
+    textarea.onkeyup = function(){
+        init();
+    };
+
+    function writeLocalStorage() {
+        if (typeof(Storage) !== "undefined") {
+            localStorage.setItem(lstag, textarea.value);
+        } else {
+            document.getElementById("err").innerHTML = "Localstorage not supported";
+        }
+    }
+
+    function readLocalStorage() {
+        if (typeof(Storage) !== "undefined") {
+            textarea.value = localStorage.getItem(lstag);
+        } else {
+            document.getElementById("err").innerHTML = "Localstorage not supported";
+        }
+    }
+
+    function init() {
+        // `DOMContentLoaded` may fire before your script has a chance to run, so check before adding a listener
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", readLocalStorage);
+        } else {  // `DOMContentLoaded` already fired
+            readLocalStorage();
+        }
+    }
+</script>
