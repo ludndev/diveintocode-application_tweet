@@ -40,4 +40,11 @@ yarn-debug.log*
 .yarn-integrity
 
 # Ignore .idea
-.idea
+/.idea/*
+bin/bundle
+bin/rails
+bin/rake
+bin/setup
+bin/spring
+bin/webpack
+bin/webpack-dev-server
