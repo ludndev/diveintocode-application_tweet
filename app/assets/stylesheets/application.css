@@ -122,6 +122,35 @@ table th {
     text-decoration: none;
 }
 
+textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+button[type=submit], input[type=button], input[type=submit], input[type=reset] {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    width: 100%;
+}
+
+form {
+    border-radius:5px;
+    background-color:#f2f2f2;
+    padding:40px;
+}
+
+form > label, button {
+    font-size: 22px;
+}
+
 .alert {
     padding: 20px;
     background-color: gray;
