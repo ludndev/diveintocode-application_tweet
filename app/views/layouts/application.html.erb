@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DiveintocodeApplicationTweet</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>DiveIntoCode &mdash; Application Tweet</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= yield %>
+    <header>
+      <h1><%= @title %></h1>
+      <nav>
+        <ul>
+          <li><a id="all" href="<%= tweets_path  %>">ALL</a></li>
+          <li><a id="new" href="<%= new_tweet_path %>">NEW</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; ludndev</p>
+    </footer>
   </body>
 </html>
