@@ -30,9 +30,11 @@ class TweetsController < ApplicationController
     @tweet = @post.destroy()
 
     if @tweet
-      redirect_to tweets_index_path, notice: 'delete success'
+      flash[:success] = "deletion success"
+      redirect_to tweets_index_path
     else
-      redirect_to tweets_index_path, notice: 'delete failed'
+      flash[:danger] = "deletion failed"
+      redirect_to show_tweet_path(id: @tweet.id)
     end
   end
 
@@ -44,9 +46,11 @@ class TweetsController < ApplicationController
     @tweet = Post.create(content: @content)
 
     if @tweet
-      redirect_to show_tweet_path(id: @tweet.id), notice: 'create success'
+      flash[:success] = "create success"
+      redirect_to show_tweet_path(id: @tweet.id)
     else
-      redirect_to show_tweet_path(id: @tweet.id), notice: 'create failed'
+      flash[:success] = "create failed"
+      redirect_to show_tweet_path(id: @tweet.id)
     end
   end
 
@@ -58,9 +62,11 @@ class TweetsController < ApplicationController
     @tweet = @post.update(content: @content)
 
     if @tweet
-      redirect_to show_tweet_path(id: @tweet.id), notice: 'update success'
+      flash[:success] = "update success"
+      redirect_to show_tweet_path(id: @tweet.id)
     else
-      redirect_to show_tweet_path(id: @tweet.id), notice: 'update failed'
+      flash[:success] = "update failed"
+      redirect_to show_tweet_path(id: @tweet.id)
     end
   end
 
