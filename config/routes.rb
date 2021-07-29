@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   # post
 
-  post '/post/tweet/:id/new', to: 'tweets#post_new', as: 'post_new_tweet'
+  post '/post/tweet/new', to: 'tweets#post_new', as: 'post_new_tweet'
 
   post '/post/tweet/:id/update', to: 'tweets#post_update', as: 'post_update_tweet'
 
