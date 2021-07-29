@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+require 'faker'
+
+20.times do
+  content = Faker::Lorem.paragraph_by_chars(number: 256, supplemental: false)
+
+  # Save
+  Post.create(content: content)
+end
