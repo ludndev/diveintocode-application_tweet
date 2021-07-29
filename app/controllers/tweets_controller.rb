@@ -63,10 +63,10 @@ class TweetsController < ApplicationController
 
     if @tweet
       flash[:success] = "update success"
-      redirect_to show_tweet_path(id: @tweet.id)
+      redirect_to show_tweet_path(id: @post.id)
     else
       flash[:success] = "update failed"
-      redirect_to show_tweet_path(id: @tweet.id)
+      redirect_to show_tweet_path(id: @post.id)
     end
   end
 
