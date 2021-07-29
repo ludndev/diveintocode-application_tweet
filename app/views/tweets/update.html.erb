@@ -1,0 +1,9 @@
+
+<form action="<%= post_update_tweet_path %>" method="post">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+  <label for="content">Content</label>
+  <textarea name="content" id="content" cols="30" rows="10" minlength="1" maxlength="140" required><%= @post.content %></textarea>
+
+  <button type="submit" name="submit">UPDATE</button>
+</form>
