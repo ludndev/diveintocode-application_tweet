@@ -40,12 +40,13 @@ class TweetsController < ApplicationController
 
   def post_new
     @content = params[:content]
-    @tweet = Post.new(content: content)
+
+    @tweet = Post.create(content: @content)
 
     if @tweet
-      redirect_to show_tweet_path(@tweet.id), notice: 'create success'
+      redirect_to show_tweet_path(id: @tweet.id), notice: 'create success'
     else
-      redirect_to show_tweet_path(@tweet.id), notice: 'create failed'
+      redirect_to show_tweet_path(id: @tweet.id), notice: 'create failed'
     end
   end
 
@@ -54,12 +55,12 @@ class TweetsController < ApplicationController
     @content = params[:content]
 
     @post = Post.find(@id)
-    @tweet = @post.update(content: content)
+    @tweet = @post.update(content: @content)
 
     if @tweet
-      redirect_to show_tweet_path(@tweet.id), notice: 'update success'
+      redirect_to show_tweet_path(id: @tweet.id), notice: 'update success'
     else
-      redirect_to show_tweet_path(@tweet.id), notice: 'update failed'
+      redirect_to show_tweet_path(id: @tweet.id), notice: 'update failed'
     end
   end
 
