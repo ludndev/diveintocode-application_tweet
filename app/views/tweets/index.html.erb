@@ -1,0 +1,19 @@
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Created At</th>
+    <th>Content</th>
+    <th>Action</th>
+  </tr>
+
+  <% @posts.each do |post| %>
+  <tr>
+    <td><%= post.id %></td>
+    <td title="<%= post.created_at %>"><%= time_ago_in_words(post.created_at) %></td>
+    <td><%= post.content %></td>
+    <td class="showBtn" >
+      <a href="<%= tweet_path(id: post.id) %>">voir</a>
+    </td>
+  </tr>
+  <% end %>
+</table>
