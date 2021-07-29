@@ -1,34 +1,66 @@
 class TweetsController < ApplicationController
 
   def index
-    @title = "List of Tweets"
+    @title = "List Of Tweets"
     @posts = Post.all
   end
 
   def new
-    @title = "title"
-  end
-
-  def edit
-    @title = "title"
+    @title = "Create A New Tweet"
   end
 
   def show
-    @title = "Tweet "
-  end
+    @id = params[:id]
 
-  # ---
-
-  def create
-    @title = "title"
+    @post = Post.find(@id)
+    @title = "Tweet : #{@post.id}"
   end
 
   def update
-    @title = "title"
+    @id = params[:id]
+
+    @post = Post.find(@id)
+    @title = "Update Tweet : #{@post.id}"
   end
 
-  def destroy
-    @title = "title"
+  def delete
+    @id = params[:id]
+
+    @post = Post.find(@id)
+    @tweet = @post.destroy()
+
+    if @tweet
+      redirect_to tweets_index_path, notice: 'delete success'
+    else
+      redirect_to tweets_index_path, notice: 'delete failed'
+    end
+  end
+
+  # --- post methods
+
+  def post_new
+    @content = params[:content]
+    @tweet = Post.new(content: content)
+
+    if @tweet
+      redirect_to show_tweet_path(@tweet.id), notice: 'create success'
+    else
+      redirect_to show_tweet_path(@tweet.id), notice: 'create failed'
+    end
+  end
+
+  def post_update
+    @id = params[:id]
+    @content = params[:content]
+
+    @post = Post.find(@id)
+    @tweet = @post.update(content: content)
+
+    if @tweet
+      redirect_to show_tweet_path(@tweet.id), notice: 'update success'
+    else
+      redirect_to show_tweet_path(@tweet.id), notice: 'update failed'
+    end
   end
 
 end
