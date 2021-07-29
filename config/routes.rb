@@ -3,6 +3,6 @@ Rails.application.routes.draw do
 
   root to: 'tweets#index'
 
-  get '/list', to: 'tweets#index', as: 'index'
+  resources :tweets
 
 end
