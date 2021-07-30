@@ -42,15 +42,19 @@ class TweetsController < ApplicationController
 
   def post_new
     @content = params[:content]
-
-    @tweet = Post.create(content: @content)
-
-    if @tweet
-      flash[:success] = "create success"
-      redirect_to show_tweet_path(id: @tweet.id)
+    if @content.nil? || @content.length < 1 || @content.length > 140
+      flash[:danger] = "tweet content is invalid"
+      redirect_to new_tweet_path
     else
-      flash[:success] = "create failed"
-      redirect_to show_tweet_path(id: @tweet.id)
+      @tweet = Post.create(content: @content)
+
+      if @tweet.valid?
+        flash[:success] = "create success"
+        redirect_to show_tweet_path(id: @tweet.id)
+      else
+        flash[:danger] = "create failed"
+        redirect_to show_tweet_path(id: @tweet.id)
+      end
     end
   end
 
@@ -58,15 +62,20 @@ class TweetsController < ApplicationController
     @id = params[:id]
     @content = params[:content]
 
-    @post = Post.find(@id)
-    @tweet = @post.update(content: @content)
-
-    if @tweet
-      flash[:success] = "update success"
-      redirect_to show_tweet_path(id: @post.id)
+    if @content.nil? || @content.length < 1 || @content.length > 140
+      flash[:danger] = "tweet content is invalid"
+      redirect_to new_tweet_path
     else
-      flash[:success] = "update failed"
-      redirect_to show_tweet_path(id: @post.id)
+      @post = Post.find(@id)
+      @tweet = @post.update(content: @content)
+
+      if @tweet
+        flash[:success] = "update success"
+        redirect_to show_tweet_path(id: @post.id)
+      else
+        flash[:danger] = "update failed"
+        redirect_to show_tweet_path(id: @post.id)
+      end
     end
   end
 
