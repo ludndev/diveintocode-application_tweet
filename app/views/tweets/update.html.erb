@@ -1,5 +1,5 @@
 
-<form action="<%= post_update_tweet_path %>" method="post">
+<form action="<%= post_update_tweet_path %>" method="post" onsubmit="return validateMyForm();">
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
   <h2>Old Content</h2>
@@ -17,44 +17,7 @@
 </form>
 
 <script>
-    /** https://stackoverflow.com/a/52937632 */
-
-    var olv = "<%= @post.content %>";
-    var textarea = document.getElementById("content");
-    textarea.addEventListener('input', writeLocalStorage);
-
-    var lstag = document.URL;
-
-    init();
-
-    textarea.onkeyup = function(){
-        init();
-    };
-
-    function writeLocalStorage() {
-        if (typeof(Storage) !== "undefined") {
-            localStorage.setItem(lstag, textarea.value);
-        } else {
-            document.getElementById("err").innerHTML = "Localstorage not supported";
-        }
-    }
-
-    function readLocalStorage() {
-        if (typeof(Storage) !== "undefined") {
-            textarea.value = localStorage.getItem(lstag);
-        } else {
-            document.getElementById("err").innerHTML = "Localstorage not supported";
-        }
-    }
-
-    function init() {
-        if (textarea.value && localStorage.getItem(lstag) !== olv) {
-            // `DOMContentLoaded` may fire before your script has a chance to run, so check before adding a listener
-            if (document.readyState === "loading") {
-                document.addEventListener("DOMContentLoaded", readLocalStorage);
-            } else {  // `DOMContentLoaded` already fired
-                readLocalStorage();
-            }
-        }
+    function validateMyForm() {
+        return confirm('Are you sure you want to update this tweet ?');
     }
 </script>
