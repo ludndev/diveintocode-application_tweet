@@ -41,10 +41,3 @@ yarn-debug.log*
 
 # Ignore .idea
 /.idea/*
-bin/bundle
-bin/rails
-bin/rake
-bin/setup
-bin/spring
-bin/webpack
-bin/webpack-dev-server
